@@ -1,34 +1,10 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            echo 'Building'
-          }
-        }
-
-        stage('ParallelBuild') {
-          steps {
-            echo 'Parallelbuiild'
-          }
-        }
-
-      }
-    }
-
-    stage('Test') {
-      steps {
-        echo 'testing'
-      }
-    }
-
-    stage('Deploy') {
-      steps {
-        echo 'Deploying'
-      }
-    }
-
-  }
-}
+    agent any
+    stages {
+        stage('Submit Stack') {
+            steps {
+            exec "aws cloudformation create-stack --stack-name s3bucket --template-body file://simplests3cft.json --region 'us-east-1'"
+              }
+             }
+            }
+            }
